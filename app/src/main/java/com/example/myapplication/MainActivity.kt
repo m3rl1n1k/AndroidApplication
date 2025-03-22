@@ -19,8 +19,12 @@ import android.widget.Switch as Switch
 import androidx.core.content.edit
 import androidx.work.WorkManager
 import androidx.work.OneTimeWorkRequestBuilder
+import dagger.hilt.android.AndroidEntryPoint
+import jakarta.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+
 
     private val notificationViewModel: NotificationViewModel by viewModels()
     private lateinit var notificationTextView: TextView
@@ -53,17 +57,17 @@ class MainActivity : AppCompatActivity() {
         notificationTextView = findViewById(R.id.notificationTextView)
 
         // save switch  state
-        val state: Boolean = saveState(readNotificationSwitch)
+        val state : Boolean = saveState(readNotificationSwitch)
 
         // ✅ Restore switch state correctly
         readNotificationSwitch.isChecked = loadState()
 
         // ✅ Observe notifications **outside of the switch condition**
         notificationViewModel.notificationText.observe(this) { notificationText ->
-            if (readNotificationSwitch.isChecked) { // ✅ Читаємо тільки якщо перемикач увімкнений
+            if (readNotificationSwitch.isChecked) {
                 val oldText = notificationTextView.text.toString()
                 notificationTextView.text = "$oldText\n$notificationText"
-                NotificationMain.handel(notificationText)
+                NotificationMain.handle(notificationText)
             }
         }
 
@@ -128,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendTestNotification(id: Int) {
         val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         // Create notification channel for Android Oreo and above
         val channelId = "test_channel"
@@ -162,3 +166,5 @@ class MainActivity : AppCompatActivity() {
             private set
     }
 }
+
+

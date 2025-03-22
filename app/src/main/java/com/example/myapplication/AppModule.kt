@@ -30,4 +30,13 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(TransactionApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTransactionRepository(
+        dao: TransactionDao,
+        api: TransactionApi
+    ): TransactionRepository {
+        return TransactionRepository(dao, api)
+    }
 }

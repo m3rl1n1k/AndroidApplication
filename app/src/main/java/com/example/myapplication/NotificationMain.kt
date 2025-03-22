@@ -2,12 +2,22 @@ package com.example.myapplication
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import jakarta.inject.Inject
 
 @HiltAndroidApp
-class NotificationMain : Application() {
-    companion object {
-        fun handel(notificationText: String) {
-            NotificationParser.parse(notificationText)
+class NotificationMain @Inject constructor(
+    var transactionRepository: TransactionRepository
+) : Application() {
+
+    suspend fun handle(notificationText: String) {
+        val transaction = NotificationParser.parse(notificationText)
+        transaction?.let {
+            transactionRepository.saveTransaction(it)
+        } ?: run {
+
+            println("Transaction is null!")
         }
     }
+
+    companion object
 }
