@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnOpenSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btnOpenSettings" />
+
+    <Button
+        android:id="@+id/callNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Born" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear" />
+
+    <Switch
+        android:id="@+id/readNotificationSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read Notifiaction" />
+
+    <TextView
+        android:id="@+id/notificationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="559dp"
+        android:text="Notification will appear here"
+        android:textSize="18sp" />
+
+</LinearLayout>
